@@ -1,3 +1,7 @@
+import { getInitials, formatFullName } from '../../shared/utils/formatters.js';
+import { isAdmin as checkIsAdmin } from '../../shared/constants/roles.js';
+import { isActive } from '../../shared/constants/status.js';
+
 export class User {
     constructor(data = {}) {
         this.id = data.id ?? null;

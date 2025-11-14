@@ -1,3 +1,6 @@
+import { formatDate } from '../../shared/utils/formatters.js';
+import { CHECK_STATUS } from '../../shared/constants/status.js';
+
 export class Check {
     constructor(data = {}) {
 
@@ -23,7 +26,7 @@ export class Check {
         const checkIn = new Date(this.checkInTime);
         const checkOut = this.checkOutTime ? new Date(this.checkOutTime) : new Date();
 
-        const diffMs = checkOut - checkIn;
+        const diffMs = checkOut.getTime() - checkIn.getTime();
         return Math.floor(diffMs / 60000);
     }
 

@@ -1,23 +1,23 @@
 export class User {
     constructor(data = {}) {
-        this.id = data.id || null;
-        this.name = data.name || "";
-        this.lastName = data.lastName || "";
-        this.phone = data.phone || null;
-        this.gender = data.gender || "";
-        this.age = data.age || 0;
-        this.email = data.email || "";
-        this.role = data.role || 'USER';
-        this.membership = data.membership || "BASICO";
-        this.status = data.status || "ACTIVO";
-        this.joinDate = data.joinDate || null;
-        this.joinHour = data.joinHour || null;
-        this.birthday = data.birthday || null;
+        this.id = data.id ?? null;
+        this.name = data.name ?? "";
+        this.lastName = data.lastName ?? "";
+        this.phone = data.phone ?? null;
+        this.gender = data.gender ?? "";
+        this.age = data.age ?? 0;
+        this.email = data.email ?? "";
+        this.role = data.role ?? 'USER';
+        this.membership = data.membership ?? "BASICO";
+        this.status = data.status ?? "ACTIVO";
+        this.joinDate = data.joinDate ?? null;
+        this.joinHour = data.joinHour ?? null;
+        this.birthday = data.birthday ?? null;
         this.emergencyContact = data.emergencyContact || null;
-        this.height = data.height || null;
-        this.weight = data.weight || null;
-        this.avatar = data.avatar || "";
-        this.refreshToken = data.refreshToken || "";
+        this.height = data.height ?? null;
+        this.weight = data.weight ?? null;
+        this.avatar = data.avatar ?? "";
+        this.refreshToken = data.refreshToken ?? "";
     }
 
     get fullName() {

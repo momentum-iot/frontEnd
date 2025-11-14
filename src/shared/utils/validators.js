@@ -194,4 +194,23 @@ export const validateRegistrationForm = (formData) => {
     };
 };
 
+export const validateLoginForm = (formData) => {
+    const errors = {};
+
+    const emailValidation = validateEmail(formData.email);
+    if (!emailValidation.isValid) {
+        errors.email = emailValidation.error;
+    }
+
+    const passwordValidation = validatePassword(formData.password);
+    if (!passwordValidation.isValid) {
+        errors.password = passwordValidation.error;
+    }
+
+    return {
+        isValid: Object.keys(errors).length === 0,
+        errors
+    };
+};
+
 

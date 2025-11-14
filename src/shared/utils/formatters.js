@@ -33,7 +33,7 @@ export const formatRelativeDate = (date) => {
   try {
     const d = typeof date === 'string' ? new Date(date) : date;
     const now = new Date();
-    const diffMs = now - d;
+    const diffMs = now.getTime() - d.getTime();
     const diffMins = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMins / 60);
     const diffDays = Math.floor(diffHours / 24);

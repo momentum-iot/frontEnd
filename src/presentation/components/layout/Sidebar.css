@@ -1,0 +1,86 @@
+.sidebar {
+  background: #0a1020;
+  border-right: 1px solid var(--line);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: var(--spacing-sm);
+  padding: 0;
+}
+
+.brand .brand-text {
+  padding: var(--spacing-sm);
+}
+
+.brand .admin {
+  margin-left: auto;
+  background: #16a34a22;
+  border: 1px solid #22c55e55;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.side-item {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.side-item:hover {
+  background: #111b34;
+  color: var(--text);
+}
+
+.side-item.active {
+  background: #111b34;
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoBox {
+  background-color: #84c217;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 8px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+

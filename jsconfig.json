@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2020",
+    "module": "esnext",
+    "checkJs": true,
+    "allowJs": true,
+    "lib": ["es2020", "dom"],
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "env.d.ts"]
+}

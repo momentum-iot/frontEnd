@@ -1,0 +1,65 @@
+
+:root {
+  
+  --bg: #0E1F2F;             
+  --panel: #14263A;           
+  --card: #1C2F45;           
+  --line: rgba(255, 255, 255, .08);  
+  --text: #FFFFFF;            
+  --muted: #94a3b8;           
+  
+  
+  --accent: #84C216;         
+  --warn: #F5C542;     
+  --danger: #E94E4E;    
+  --info: #60a5fa;
+  
+  --badge-success-bg: #052e1e;
+  --badge-success-border: #1dd69a55;
+  --badge-success-text: #1dd69a;
+  
+  --badge-warn-bg: #2f2205;
+  --badge-warn-border: #f59e0b55;
+  --badge-warn-text: #f59e0b;
+  
+  --badge-danger-bg: #3b0b0b;
+  --badge-danger-border: #ef444455;
+  --badge-danger-text: #ef4444;
+    --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+    --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 20px;
+  --text-3xl: 24px;
+  --text-4xl: 32px;
+  
+
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+  --z-toast: 100;
+}

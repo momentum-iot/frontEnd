@@ -1,0 +1,16 @@
+.logoContainerLogin {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.logoBoxLogin {
+  background-color: #84c217;
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,33 @@
+.create-user-modal .form-section {
+  padding: var(--spacing-lg);
+  background: rgba(132, 194, 22, 0.1);
+  border: 1px solid rgba(132, 194, 22, 0.3);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-sm);
+}
+
+.create-user-modal .form-section h4 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.create-user-modal .error-alert {
+  padding: var(--spacing-md);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--text-base);
+}
+
+.create-user-modal .success-alert {
+  padding: var(--spacing-md);
+  background: rgba(132, 194, 22, 0.1);
+  border: 1px solid rgba(132, 194, 22, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--text-base);
+}

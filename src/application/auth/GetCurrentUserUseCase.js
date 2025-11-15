@@ -1,7 +1,7 @@
 import { User } from "@/domain/entities/User";
 import { TokenStorage } from "@/infrastructure/storage/TokenStorage";
 
-export class GetCurrentUserUserCase {
+export class GetCurrentUserUseCase {
 
     constructor(authRepository) {
         this.authRepository = authRepository;

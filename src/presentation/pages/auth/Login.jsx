@@ -4,7 +4,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 import { Input } from '../../components/common/Input/Input.jsx';
 import { Button } from '../../components/common/Button/Button.jsx';
 import { IoBarbell } from "react-icons/io5";
-import './login.css';
+import './Login.css';
 
 export const Login = () => {
   const navigate = useNavigate();

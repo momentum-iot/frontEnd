@@ -58,6 +58,9 @@ httpClient.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
+        // Evitar intentos de refresh en endpoints de auth (login/register/refresh)
+        const isAuthEndpoint = originalRequest?.url?.includes('/api/auth/');
+
 
         if (!error.response) {
             console.error('[HTTP] Network error:', error.message);
@@ -75,7 +78,7 @@ httpClient.interceptors.response.use(
         }
 
 
-        if (status === 401 && !originalRequest._retry) {
+        if (status === 401 && !originalRequest._retry && !isAuthEndpoint) {
 
             if (isRefreshing) {
                 return new Promise((resolve, reject) => {
@@ -149,6 +152,13 @@ httpClient.interceptors.response.use(
                 });
             }
         }
+
+        // Propagar otros errores con el mensaje del backend si existe
+        const backendMessage = data?.message || data?.error;
+        return Promise.reject({
+            message: backendMessage || error.message || 'Error en la petición',
+            status
+        });
 
     }
 );

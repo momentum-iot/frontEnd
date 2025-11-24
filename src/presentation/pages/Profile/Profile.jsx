@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { Badge } from '../../components/common/Badge/Badge.jsx';
 import { formatDate, calculateBMI } from '../../../shared/utils/formatters.js';
-import { getMembershipInfo } from '../../../shared/constants/membership.js';
+import { getMembershipInfo, MEMBERSHIP_TYPES } from '../../../shared/constants/membership.js';
 import { getStatusLabel } from '../../../shared/constants/status.js';
 import { getRoleLabel } from '../../../shared/constants/roles.js';
+import { createMembershipCheckoutSession } from '../../../infrastructure/api/payments/paymentService.js';
 import './Profile.css';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export const Profile = () => {
     const { user } = useAuth();
+    const [isPaying, setIsPaying] = useState(false);
+    const [isUpgrading, setIsUpgrading] = useState(false);
 
     if (!user) {
         return (
@@ -20,6 +26,73 @@ export const Profile = () => {
 
     const membershipInfo = getMembershipInfo(user.membership);
     const bmi = calculateBMI(user.height, user.weight);
+
+    const handlePayMembership = async () => {
+        try {
+            if (!import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY) {
+                throw new Error('Falta configurar VITE_STRIPE_PUBLISHABLE_KEY en .env');
+            }
+
+            setIsPaying(true);
+
+            const { sessionId, url } = await createMembershipCheckoutSession(user.membership);
+            if (url) {
+                window.location.href = url; // nueva API: redirigir usando la URL de Checkout
+                return;
+            }
+
+            const stripe = await stripePromise;
+
+            if (!stripe) {
+                throw new Error('Stripe no se pudo inicializar');
+            }
+
+            const { error } = await stripe.redirectToCheckout({ sessionId });
+            if (error) {
+                console.error('Stripe redirect error:', error);
+                alert('No se pudo redirigir al pago. Inténtalo nuevamente.');
+            }
+        } catch (err) {
+            console.error('Payment error:', err);
+            const message = err?.response?.data?.message || err?.message;
+            alert(message || 'No se pudo iniciar el pago. Inténtalo nuevamente.');
+        } finally {
+            setIsPaying(false);
+        }
+    };
+
+    const handleUpgradeMembership = async () => {
+        try {
+            if (!import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY) {
+                throw new Error('Falta configurar VITE_STRIPE_PUBLISHABLE_KEY en .env');
+            }
+
+            setIsUpgrading(true);
+
+            const { sessionId, url } = await createMembershipCheckoutSession(MEMBERSHIP_TYPES.PREMIUM);
+            if (url) {
+                window.location.href = url;
+                return;
+            }
+
+            const stripe = await stripePromise;
+            if (!stripe) {
+                throw new Error('Stripe no se pudo inicializar');
+            }
+
+            const { error } = await stripe.redirectToCheckout({ sessionId });
+            if (error) {
+                console.error('Stripe redirect error:', error);
+                alert('No se pudo redirigir al pago. Inténtalo nuevamente.');
+            }
+        } catch (err) {
+            console.error('Upgrade payment error:', err);
+            const message = err?.response?.data?.message || err?.message;
+            alert(message || 'No se pudo iniciar el pago. Inténtalo nuevamente.');
+        } finally {
+            setIsUpgrading(false);
+        }
+    };
 
     return (
         <div style={{ padding: 20 }}>
@@ -159,6 +232,46 @@ export const Profile = () => {
                                 ))}
                             </ul>
                         </div>
+
+                        <button
+                            onClick={handlePayMembership}
+                            disabled={isPaying}
+                            style={{
+                                marginTop: 12,
+                                width: '100%',
+                                padding: '12px 16px',
+                                borderRadius: 10,
+                                border: 'none',
+                                background: membershipInfo.color,
+                                color: 'white',
+                                fontWeight: 700,
+                                cursor: isPaying ? 'not-allowed' : 'pointer',
+                                opacity: isPaying ? 0.7 : 1
+                            }}
+                        >
+                            {isPaying ? 'Redirigiendo a Stripe...' : 'Pagar membresía con tarjeta'}
+                        </button>
+
+                        {user.membership !== MEMBERSHIP_TYPES.PREMIUM && (
+                            <button
+                                onClick={handleUpgradeMembership}
+                                disabled={isUpgrading}
+                                style={{
+                                    marginTop: 8,
+                                    width: '100%',
+                                    padding: '12px 16px',
+                                    borderRadius: 10,
+                                    border: '1px solid #111827',
+                                    background: isUpgrading ? '#111827' : '#0f172a',
+                                    color: 'white',
+                                    fontWeight: 700,
+                                    cursor: isUpgrading ? 'not-allowed' : 'pointer',
+                                    opacity: isUpgrading ? 0.8 : 1
+                                }}
+                            >
+                                {isUpgrading ? 'Redirigiendo...' : 'Mejorar a Premium'}
+                            </button>
+                        )}
                     </div>
 
 

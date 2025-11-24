@@ -8,6 +8,7 @@ import { Login } from './presentation/pages/auth/Login.jsx';
 import { Dashboard } from './presentation/pages/Dashboard/Dashboard.jsx';
 import { Profile } from './presentation/pages/Profile/Profile.jsx';
 import { Users } from './presentation/pages/Users/Users.jsx';
+import { PaymentSuccess } from './presentation/pages/Payments/PaymentSuccess.jsx';
 
 
 const AdminRoute = ({ children }) => {
@@ -106,6 +107,17 @@ function AppRoutes() {
           <AdminRoute>
             <Layout>
               <Profile />
+            </Layout>
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/pagos/exito"
+        element={
+          <AdminRoute>
+            <Layout>
+              <PaymentSuccess />
             </Layout>
           </AdminRoute>
         }

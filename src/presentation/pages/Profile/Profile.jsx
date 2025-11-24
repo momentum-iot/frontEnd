@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 import { Badge } from '../../components/common/Badge/Badge.jsx';
 import { formatDate, calculateBMI } from '../../../shared/utils/formatters.js';
@@ -12,9 +13,20 @@ import './Profile.css';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export const Profile = () => {
-    const { user } = useAuth();
+    const { user, refreshUser } = useAuth();
+    const location = useLocation();
     const [isPaying, setIsPaying] = useState(false);
     const [isUpgrading, setIsUpgrading] = useState(false);
+
+    // Si volvemos del checkout (success_url con query), refrescamos el usuario para traer la membresía actualizada
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const hasCheckoutSignal = params.get('session_id') || params.get('success') === 'true';
+
+        if (hasCheckoutSignal) {
+            refreshUser?.();
+        }
+    }, [location.search, refreshUser]);
 
     if (!user) {
         return (

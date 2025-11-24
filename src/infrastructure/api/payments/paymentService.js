@@ -12,3 +12,15 @@ export const createMembershipCheckoutSession = async (membershipType) => {
     throw error;
   }
 };
+
+export const confirmMembershipPayment = async (sessionId, userId) => {
+  try {
+    const response = await httpClient.post("/api/payments/confirm", {
+      sessionId,
+      userId,
+    });
+    return response.data; // espera status/membershipUpdated
+  } catch (error) {
+    throw error;
+  }
+};

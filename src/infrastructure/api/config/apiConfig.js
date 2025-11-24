@@ -1,4 +1,9 @@
-export const API_BASE_URL = "http://localhost:8080";
+// Usa variables de entorno inyectadas por Vite/Netlify, con fallback local.
+const ENV_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+export const API_BASE_URL = (ENV_BASE_URL || 'http://localhost:8080').replace(/\/+$/, '');
+
+const parsedTimeout = Number(import.meta.env.VITE_API_TIMEOUT);
+const DEFAULT_TIMEOUT = 30000;
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -20,7 +25,7 @@ export const API_ENDPOINTS = {
 
 export const API_CONFIG = {
 
-  TIMEOUT: 30000,
+  TIMEOUT: Number.isFinite(parsedTimeout) ? parsedTimeout : DEFAULT_TIMEOUT,
 
 
   DEFAULT_HEADERS: {

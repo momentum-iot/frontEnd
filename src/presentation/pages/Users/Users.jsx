@@ -22,7 +22,7 @@ export const Users = () => {
     const [roleFilter, setRoleFilter] = useState('ALL');
     const [showCreateModal, setShowCreateModal] = useState(false);
 
-    
+
     useEffect(() => {
 
         if (!isAdmin) {
@@ -160,7 +160,7 @@ export const Users = () => {
                         padding: 60,
                         color: 'var(--muted)'
                     }}>
-                        
+
                         <div style={{ fontSize: 16, marginBottom: 8 }}>
                             No se encontraron usuarios
                         </div>
@@ -195,7 +195,12 @@ export const Users = () => {
                                 </div>
 
 
-                                <div style={{ marginRight: 12 }}>
+                                <div style={{
+                                    marginRight: 20, display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                }}>
                                     <Badge variant={user.role === 'ADMIN' ? 'success' : 'default'}>
                                         {getRoleLabel(user.role)}
                                     </Badge>
@@ -203,9 +208,13 @@ export const Users = () => {
 
 
                                 <div style={{
-                                    textAlign: 'right',
+                                    textAlign: 'center',
                                     marginRight: 12,
-                                    minWidth: 100
+                                    minWidth: 100,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    alignItems: "center"
                                 }}>
                                     <div style={{ fontSize: 12, fontWeight: 600 }}>
                                         {user.membership}
@@ -216,9 +225,18 @@ export const Users = () => {
                                 </div>
 
 
-                                <Badge status={user.status}>
-                                    {user.status}
-                                </Badge>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        minWidth: 90
+                                    }}
+                                >
+                                    <Badge status={user.status}>
+                                        {user.status}
+                                    </Badge>
+                                </div>
                             </div>
                         ))}
                     </div>
